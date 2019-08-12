@@ -1,0 +1,19 @@
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+  height: 70px !important;
+  padding: 10px;
+  text-align: center;
+}
+.login-logo, .register-logo{
+  text-shadow: 1px 1px #D3D3D3 !important;
+}
+
+.modal-dialog {
+  position: relative;
+  width: 20% !important;
+  margin: 10px;
+}
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
