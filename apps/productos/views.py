@@ -30,19 +30,29 @@ def Manage_lines(request):
 	return HttpResponse(template.render(context, request))
 
 
-def Edit_line(request, ide):
-	linea = Linea.objects.get(id=ide)
+def Edit_line(request, id):
+	linea = Linea.objects.get(id=id)
 	if request.method == 'POST':
-		lineas = Linea.objects.get(id=ide)
+		form = Line_form(request.POST, instance=linea)
+		if form.is_valid():
+			form.save()
+			return redirect('/productos/lines/')
+	else:
+		form = Line_form(instance=linea)
 		template = loader.get_template('edit_line.html')
 		context = {
+			'form': form,
 			'linea': linea,
 		}
 		return HttpResponse(template.render(context, request))
-	else:
+
+def See_line(request, id):
+	linea = Linea.objects.get(id=id)
+	if request.method == 'GET':
 		form = Line_form(instance=linea)
-		lineas = Linea.objects.get(id=ide)
-		template = loader.get_template('edit_line.html')
+		template = loader.get_template('see_line.html')
+		form.fields['name'].widget.attrs['disabled'] = 'disabled'
+		form.fields['description'].widget.attrs['disabled'] = 'disabled'
 		context = {
 			'form': form,
 			'linea': linea,

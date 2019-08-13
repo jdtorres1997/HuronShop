@@ -19,14 +19,12 @@
                     <td>{{line.name}}</td>
                     <td colspan="3">{{line.description}}</td>
                     <td><center>
-                        <center>
-                            <a href="/productos/line/edit/{{line.id}}" type="submit" class="btn btn-danger btn-md " style="color: black">Editar</a>
-                          </center>
+                      <a href="/productos/line/edit/{{line.id}}" type="submit" class="btn btn-danger btn-md " style="color: black">Editar</a>
                     </center>
                     </td>
                     <td><center>
-                            <a type="submit" name="_submit" class="btn btn-info btn-md " style="color: black">Ver</a>
-                    </center>
+                        <a href="/productos/line/see/{{line.id}}" type="submit" class="btn btn-danger btn-md " style="color: black">Ver</a>
+                      </center>
                     </td>
                     </tr>
                 {% endfor %}
