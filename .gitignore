@@ -1,4 +1,4 @@
-HuronShop\serversettings.py
+HuronShop/serversettings.py
 apps/*/migrations/
 **/__pycache__/
 *.log
@@ -6,3 +6,4 @@ apps/*/migrations/
 *.pyc
 .idea
 db.sqlite3
+*.pyc
