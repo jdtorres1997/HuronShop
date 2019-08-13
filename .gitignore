@@ -1,1 +1,8 @@
 HuronShop\serversettings.py
+apps/*/migrations/
+**/__pycache__/
+*.log
+*.pot
+*.pyc
+.idea
+db.sqlite3

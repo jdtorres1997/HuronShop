@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block contenido_panel %}
+
+    <table class="table table-striped table-dark table-bordered">
+            <thead>
+              <tr>
+                <th scope="col" ><center>#</center></th>
+                <th scope="col"><center>Nombre</center></th>
+                <th colspan="3"><center>Descripcion</center></th>
+                <th colspan="2"><center>Accion</center></th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for line in lineas%}
+                    <tr>
+                    <th scope="row">{{line.id}}</th>
+                    <td>{{line.name}}</td>
+                    <td colspan="3">{{line.description}}</td>
+                    <td><center>
+                        <center>
+                            <a href="/productos/line/edit/{{line.id}}" type="submit" class="btn btn-danger btn-md " style="color: black">Editar</a>
+                          </center>
+                    </center>
+                    </td>
+                    <td><center>
+                            <a type="submit" name="_submit" class="btn btn-info btn-md " style="color: black">Ver</a>
+                    </center>
+                    </td>
+                    </tr>
+                {% endfor %}
+                <div>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">
+                          <center>
+                            <a href="/productos/line/add" type="submit" class="btn btn-danger btn-md " style="color: black">Añadir</a>
+                          </center>
+                        </th>
+                        <th scope="col">
+                          <center>
+                            <a type="submit" class="btn btn-danger btn-md " style="color: black">Buscar</a>
+                          </center>
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+            </tbody>
+          </table>
+    
+
+{% endblock contenido_panel %}
