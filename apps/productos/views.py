@@ -58,3 +58,28 @@ def See_line(request, id):
 			'linea': linea,
 		}
 		return HttpResponse(template.render(context, request))
+
+
+def Consult_line(request):
+	if(request.method == 'POST'):
+		form = Line_form(request.POST)
+		form.fields['name'].required = False
+		if form.is_valid():
+			print("pruebas para ver que falla \n\n\n")
+			print(form.cleaned_data['description'])
+			lineas = Linea.objects.filter(name__contains=form.cleaned_data['name'] ,description__contains=form.cleaned_data['description'])
+			template = loader.get_template('consult_line.html')
+			context = {
+				'lineas': lineas,
+				'metodo': request.method,
+			}
+			return HttpResponse(template.render(context, request))
+	else:
+		form = Line_form()
+		template = loader.get_template('consult_line.html')
+		form.fields['name'].required = False
+		context = {
+			'form' : form,
+			'metodo': request.method,
+		}
+		return HttpResponse(template.render(context, request))

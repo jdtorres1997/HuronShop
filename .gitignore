@@ -6,4 +6,3 @@ apps/*/migrations/
 *.pyc
 .idea
 db.sqlite3
-*.pyc

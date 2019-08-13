@@ -2,7 +2,15 @@
 {% load staticfiles %}
 
 {% block contenido_panel %}
-
+    <div>
+    {%if metodo == 'GET'%}
+        <h1> Consultar Linea </h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="_submit" class="btn">Guardar</button>
+        </form>
+    {%else%}
     <table class="table table-striped table-dark table-bordered">
             <thead>
               <tr>
@@ -28,26 +36,10 @@
                     </td>
                     </tr>
                 {% endfor %}
-                <div>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">
-                          <center>
-                            <a href="/productos/line/add" type="submit" class="btn btn-danger btn-md " style="color: black">Añadir</a>
-                          </center>
-                        </th>
-                        <th scope="col">
-                          <center>
-                              <a href="/productos/line/consult" type="submit" class="btn btn-danger btn-md " style="color: black">Buscar</a>
-                          </center>
-                        </th>
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
             </tbody>
-          </table>
+        </table>
+                <a href="/productos/lines" type="submit" class="btn btn-danger btn-md " style="color: black">Volver</a>
+    {% endif %}
     
-
+    </div>  
 {% endblock contenido_panel %}
