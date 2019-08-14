@@ -27,18 +27,18 @@
                     <td>{{line.name}}</td>
                     <td colspan="3">{{line.description}}</td>
                     <td><center>
-                      <a href="/line/edit/{{line.id}}" type="submit" class="btn btn-danger btn-md " style="color: black">Editar</a>
+                      <a href="edit/{{line.id}}" type="submit" class="btn btn-danger btn-md " style="color: black">Editar</a>
                     </center>
                     </td>
                     <td><center>
-                        <a href="/line/see/{{line.id}}" type="submit" class="btn btn-danger btn-md " style="color: black">Ver</a>
+                        <a href="see/{{line.id}}" type="submit" class="btn btn-danger btn-md " style="color: black">Ver</a>
                       </center>
                     </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-                <a href="/lines" type="submit" class="btn btn-danger btn-md " style="color: black">Volver</a>
+                <a href="/lineas" type="submit" class="btn btn-danger btn-md " style="color: black">Volver</a>
     {% endif %}
     
     </div>  

@@ -10,6 +10,7 @@ urlpatterns = [
                     template_name='accounts/login.html'), name='login'),
     path('home', home, name='home'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('gestion-usuarios', signup, name='registro'),
-    path('editar-usuario/<int:id_user>', editar_usuario, name='modificar_usuario'),
+    path('usuarios', gestion_usuarios, name='gestion'),
+    path('usuarios/add', add_usuario, name='crear_usuario'),
+    path('usuarios/edit/<int:id_user>', editar_usuario, name='modificar_usuario'),
 ]

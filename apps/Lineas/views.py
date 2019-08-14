@@ -4,14 +4,16 @@ from django.http import HttpResponse, HttpResponseRedirect
 import json
 from apps.Lineas.forms import *
 from apps.Lineas.models import *
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def Add_line(request):
 	if(request.method == 'POST'):
 		form = Line_form(request.POST)
 		if form.is_valid():
 			linea = form.save()
 			linea.save()
-			return  redirect('/lines/')
+			return  redirect('/lineas')
 	else:
 		form = Line_form()
 		template = loader.get_template('Addline.html')
@@ -20,7 +22,7 @@ def Add_line(request):
 		}
 		return HttpResponse(template.render(context, request))
 
-
+@login_required
 def Manage_lines(request):
 	lineas = Linea.objects.order_by('id')
 	template = loader.get_template('manage_lines.html')
@@ -29,14 +31,14 @@ def Manage_lines(request):
 	}
 	return HttpResponse(template.render(context, request))
 
-
+@login_required
 def Edit_line(request, id):
 	linea = Linea.objects.get(id=id)
 	if request.method == 'POST':
 		form = Line_form(request.POST, instance=linea)
 		if form.is_valid():
 			form.save()
-			return redirect('/lines/')
+			return redirect('/lineas')
 	else:
 		form = Line_form(instance=linea)
 		template = loader.get_template('edit_line.html')
@@ -46,6 +48,7 @@ def Edit_line(request, id):
 		}
 		return HttpResponse(template.render(context, request))
 
+@login_required
 def See_line(request, id):
 	linea = Linea.objects.get(id=id)
 	if request.method == 'GET':
@@ -59,7 +62,7 @@ def See_line(request, id):
 		}
 		return HttpResponse(template.render(context, request))
 
-
+@login_required
 def Consult_line(request):
 	if(request.method == 'POST'):
 		form = Line_form(request.POST)
