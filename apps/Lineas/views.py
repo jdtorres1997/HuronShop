@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 import json
-from apps.productos.forms import *
-from apps.productos.models import *
+from apps.Lineas.forms import *
+from apps.Lineas.models import *
 
 def Add_line(request):
 	if(request.method == 'POST'):
@@ -11,7 +11,7 @@ def Add_line(request):
 		if form.is_valid():
 			linea = form.save()
 			linea.save()
-			return  redirect('/productos/lines/')
+			return  redirect('/lines/')
 	else:
 		form = Line_form()
 		template = loader.get_template('Addline.html')
@@ -36,7 +36,7 @@ def Edit_line(request, id):
 		form = Line_form(request.POST, instance=linea)
 		if form.is_valid():
 			form.save()
-			return redirect('/productos/lines/')
+			return redirect('/lines/')
 	else:
 		form = Line_form(instance=linea)
 		template = loader.get_template('edit_line.html')
@@ -65,9 +65,7 @@ def Consult_line(request):
 		form = Line_form(request.POST)
 		form.fields['name'].required = False
 		if form.is_valid():
-			print("pruebas para ver que falla \n\n\n")
-			print(form.cleaned_data['description'])
-			lineas = Linea.objects.filter(name__contains=form.cleaned_data['name'] ,description__contains=form.cleaned_data['description'])
+			lineas = Linea.objects.filter(name__icontains=form.cleaned_data['name'] ,description__icontains=form.cleaned_data['description'])
 			template = loader.get_template('consult_line.html')
 			context = {
 				'lineas': lineas,

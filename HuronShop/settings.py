@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     
     'apps.accounts',
     'apps.clientes',
-    'apps.productos',
+    'apps.Lineas',
     'bootstrap3',
 ]
 

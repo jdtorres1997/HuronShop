@@ -7,6 +7,6 @@
 	<form method="POST" enctype="multipart/form-data">
 		{% csrf_token %}
         {% form form=form %}{% endform %}
-        <a href="/productos/lines" type="submit" class="btn btn-danger btn-md " style="color: black">Volver</a>
+        <a href="/lines" type="submit" class="btn btn-danger btn-md " style="color: black">Volver</a>
     </form>
 {% endblock contenido_panel %}
