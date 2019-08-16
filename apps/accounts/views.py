@@ -10,6 +10,8 @@ def home(request):
     usuario = request.user
     if usuario.is_staff:
         return render(request, 'accounts/home_admin.html', {'user': usuario})
+    else:
+        return render(request, 'accounts/home_users.html', {'user': usuario})
 
 @login_required
 def gestion_usuarios(request):
@@ -30,29 +32,20 @@ def editar_usuario(request, id_user):
     usuario = request.user
 
     if usuario.is_staff:
-        '''
         if request.method == 'POST':
-            form = EditarEmpleado(request.POST, instance=user)
-            form_empleado = FormEmpleado(request.POST, instance=empleado)
-            form_empleado_extra = EditarEmpleadoExtra(request.POST, instance=user)
-            if form.is_valid() and form_empleado.is_valid() and form_empleado_extra.is_valid():
+            form = EditarUsuario(request.POST, instance=user)
+            if form.is_valid():
                 form.save()
-                form_empleado.save()
-                form_empleado_extra.save()
-                messages.success(request, 'Has modificado el empleado exitosamente!')
-                return redirect('accounts:registro')
+                messages.success(request, 'Has modificado el usuario exitosamente!')
+                return redirect('accounts:gestion')
             else:
                 messages.error(request, 'Por favor corrige los errores')
-                return render(request, 'accounts/editar_empleado.html', {'form': form, 'form_empleado': form_empleado,
-                                                                         'form_empleado_extra': form_empleado_extra})
+                return render(request, 'accounts/edit_user.html', {'form': form})
 
         else:
-            form = EditarEmpleado(instance=user)
-            form_empleado = FormEmpleado(instance=empleado)
-            form_empleado_extra = EditarEmpleadoExtra(instance=user)
-            return render(request, 'accounts/editar_empleado.html', {'form': form, 'form_empleado': form_empleado,
-                                                                     'form_empleado_extra': form_empleado_extra})
-        '''
+            form = EditarUsuario(instance=user)
+            return render(request, 'accounts/edit_user.html', {'form': form})
+        
         return redirect('accounts:gestion')
     else:
         messages.error(request, 'No estas autorizado para realizar esta acción')
