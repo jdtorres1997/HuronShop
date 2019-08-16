@@ -4,6 +4,9 @@ apps/*/migrations/
 *.log
 *.pot
 *.pyc
+*.cpython-36.pyc
 media
 .idea
 db.sqlite3
+HuronShop/__pycache__/__init__.cpython-36.pyc
+HuronShop/__pycache__/serversettings.cpython-36.pyc
