@@ -33,23 +33,23 @@
     {{ form.media.css }}
     {% block css %}{% endblock css %}
 </head>
-
-<body class="hold-transition skin-yellow-light sidebar-mini sidebar-collapse layout-boxed"  style="background-image:url({% static 'img/fondo.png' %})">
+<body class="hold-transition skin-yellow-light sidebar-mini sidebar-collapse layout-boxed" 
+    style="background-image:url({% static 'img/fondo.png' %})">
 <div class="wrapper">
 
     <!-- Main Header -->
-    <header class="main-header">
+    <header class="main-header" style="background-color: #E8BE13;">
 
         <!-- Logo -->
-        <a href="{% url 'accounts:home' %}" class="logo">
+        <a href="{% url 'accounts:home' %}" class="logo" style="background-color: #E8BE13;">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>HURON</span>
+            <span class="logo-mini" style="background-color: #E8BE13;"><b>HURON</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg">HURON SHOP</b></span>
+            <span class="logo-lg" style="background-color: #E8BE13;">HURON SHOP</b></span>
         </a>
 
         <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" role="navigation">
+        <nav class="navbar navbar-static-top" style="background-color: #E8BE13;" role="navigation">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
