@@ -1,11 +1,79 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block titulo %}Gestión de lineas{% endblock titulo %}
+{% block descripcion_pagina %} Registrar linea HURON SHOP {% endblock descripcion_pagina %}
+{% block miga_pan %}
+<li><a href="{% url 'accounts:home'%}"><i class="fa fa-dashboard"></i> DASHBOARD</a></li>
+<li><a href="/lineas/"></i> GESTIONAR LINEAS</a></li>
+<li class="active">REGISTRAR LINEA</li>
+{% endblock miga_pan %}
+
+{% block css %}
+<link rel="stylesheet" href="{%  static 'bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
+<link href="{% static 'bower_components/datatables.net-bs/responsive/responsive.dataTables.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+{{ form_empleado.media.css }}
+<style media="screen">
+    .select2-container {
+        width: 100% !important;
+    }
+</style>
+{% endblock css %}
+
+{% block titulo_panel %}
+    <h3 class="box-title"> Agregar Linea </h3>
+{% endblock titulo_panel %}
 
 {% block contenido_panel %}
-    <h1> Agregar Linea </h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" name="_submit" class="btn">Guardar</button>
+    
+    <form method="POST" id="formulario" onsubmit="return validacion()" action="/lineas/add"> {% csrf_token %}
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                {% bootstrap_field form.name %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                {% bootstrap_field form.description %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-3 text-center">
+                <button type="submit" name="_submit" id="registrar" class="btn btn-success btn-raised">Guardar</button>
+            </div>
+            <div class="col-md-3 text-center">
+                <a class="btn btn-danger btn-raised" href="/lineas" role="button">Cancelar</a>
+            </div>
     </form>
 {% endblock contenido_panel %}
+
+
+{% block js %}
+
+<script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/responsive/dataTables.responsive.min.js' %}"></script>
+
+<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+
+<script>
+    {% for msg in messages %}
+    $(document).ready(function () {
+        setTimeout(function () {
+            toastr.options = {
+                "closeButtons": true,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "showEasing": "swing",
+                "extendedTimeOut": 30000,
+                "timeOut": 4000
+            }
+            toastr["{{ msg.tags }}"]("{{ msg }}")
+        }, 500);
+    });
+    {% endfor %}
+</script>
+
+{% endblock js %}

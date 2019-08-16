@@ -14,7 +14,7 @@ class User(AbstractUser):
     @staticmethod
     def get_info():
         try:
-            usuarios = User.objects.all()
+            usuarios = User.objects.all().order_by('id')
             return usuarios
         except User.DoesNotExist:
             return None

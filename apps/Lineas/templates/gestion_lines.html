@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-{% load bootstrap3 %}
 
-
-{% block titulo %}Gestión de empleados{% endblock titulo %}
-{% block descripcion_pagina %} Gestiona los empleados HURON SHOP {% endblock descripcion_pagina %}
+{% block titulo %}Gestión de lineas{% endblock titulo %}
+{% block descripcion_pagina %} Gestiona las linea HURON SHOP {% endblock descripcion_pagina %}
 {% block miga_pan %}
 <li><a href="{% url 'accounts:home'%}"><i class="fa fa-dashboard"></i> DASHBOARD</a></li>
-<li class="active">GESTIONAR EMPLEADOS</li>
+<li class="active">GESTIONAR LINEAS</li>
 {% endblock miga_pan %}
 
 {% block css %}
@@ -27,49 +25,45 @@
 <div class="col-md-12">
     <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Listado de usuarios</h3>
+            <h3 class="box-title">Listado de lineas {{prueba}}</h3>
         </div>
         <div class="box-body">
-            <table id="tabla_usuarios" class="table table-striped table-bordered table-responsive">
+            <table id="tabla_lineas" class="table table-striped table-hover table-bordered table-responsive">
                 <thead>
                 <tr>
-                    <th>Cedula</th>
-                    <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Usuario</th>
-                    <th>Correo</th>
-                    <th>Tel.</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col" class="text-center">Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for usuario in usuarios %}
+                {% for line in lineas %}
                 <tr>
-                    <td>{{ usuario.cedula }}</td>
-                    <td>{{ usuario.first_name }}</td>
-                    <td>{{ usuario.last_name }}</td>
-                    <td>{{ usuario.username }}</td>
-                    <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.telefono }}</td>
-                    <td>
-                        {%  if usuario.is_active %} <span class="badge bg-green">Activo</span>
-                        {% else %} <span class="badge bg-red">Inactivo</span>
-                        {% endif %}
-                    </td>
-                    <td><a href="{% url 'accounts:modificar_usuario' usuario.id %}" class="btn btn-info btn-raised btn-xs ">Editar Usuario</a>
+                    <th class="col-md-1" scope="row">{{ line.id }}</td>
+                    <td class="col-md-3">{{line.name}}</td>
+                    <td class="col-md-5">{{ line.description }}</td>
+                    <td class="col-md-3">
+                    <div class="col-md-6">
+                      <a href="edit/{{line.id}}" type="submit" class="btn btn-info btn-raised btn-xs">Editar</a>
+                    </div>
+                    <div  class="col-md-6">
+                    <a href="see/{{line.id}}" type="submit" class="btn btn-info btn-raised btn-xs">Ver</a>
+                    </div>
                     </td>
                 </tr>
                 {% endfor %}
-
                 </tbody>
             </table>
 
         </div>
         <div class="box-footer">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <a class="btn btn-success btn-raised" href="/usuarios/add" role="button">Añadir</a>
+                <div class="col-md-6 text-right">
+                    <a class="btn btn-success btn-raised" href="add" role="button">Añadir</a>
+                </div>
+                <div class="col-md-6 text-left">
+                    <a class="btn btn-success btn-raised" href="consult" role="button">Consultar</a>
                 </div>
             </div>
         </div>
@@ -90,7 +84,7 @@
 {{ form_empleado.media.js }}
 <script type="text/javascript">
     $(function () {
-        $('#tabla_usuarios').DataTable({
+        $('#tabla_lineas').DataTable({
             "language": { "url": "{% static 'bower_components/datatables.net/spanish.json' %}" },
 	        "responsive": true
         })

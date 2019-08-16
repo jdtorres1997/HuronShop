@@ -24,12 +24,8 @@ def Add_line(request):
 
 @login_required
 def Manage_lines(request):
-	lineas = Linea.objects.order_by('id')
-	template = loader.get_template('manage_lines.html')
-	context = {
-		'lineas': lineas,
-	}
-	return HttpResponse(template.render(context, request))
+	return render(request, 'gestion_lines.html',
+					{'lineas': Linea.get_info()})
 
 @login_required
 def Edit_line(request, id):

@@ -8,4 +8,12 @@ class Linea(models.Model):
         ordering = ["name"]
 
     def __str__(self):
-        return self.name + ' - ' + self.desription
+        return self.name + ' - ' + self.description
+
+    @staticmethod
+    def get_info():
+        try:
+            lineas = Linea.objects.all().order_by('id')
+            return lineas
+        except Linea.DoesNotExist:
+            return None
