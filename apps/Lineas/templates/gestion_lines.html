@@ -34,6 +34,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripción</th>
+                    <th scope="col">Estado</th>
                     <th scope="col" class="text-center">Acciones</th>
                 </tr>
                 </thead>
@@ -43,6 +44,11 @@
                     <th class="col-md-1" scope="row">{{ line.id }}</td>
                     <td class="col-md-3">{{line.name}}</td>
                     <td class="col-md-5">{{ line.description }}</td>
+                    <td>
+                        {%  if line.active %} <span class="badge bg-green">Activo</span>
+                        {% else %} <span class="badge bg-red">Inactivo</span>
+                        {% endif %}
+                    </td>
                     <td class="col-md-3">
                     <div class="col-md-6">
                       <a href="edit/{{line.id}}" type="submit" class="btn btn-info btn-raised btn-xs">Editar</a>
