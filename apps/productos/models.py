@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from apps.Lineas.models import *
 from django.core.validators import MaxValueValidator, MinValueValidator
 
@@ -18,7 +17,6 @@ class Productos(models.Model):
         # https://docs.djangoproject.com/en/2.2/ref/models/fields/#django.db.models.ForeignKey.related_query_name
         related_name="lineas", 
         related_query_name="linea", 
-        to_field='name'
     )
     etiquetas = models.TextField(
         verbose_name="Etiquetas relacionadas con el producto",      
@@ -27,7 +25,7 @@ class Productos(models.Model):
         )
 
     precio = models.FloatField(
-            validators=[MinValueValidator(0.0,message="El valor minimo del oriducto no puede ser negativo"), MaxValueValidator(58)],
+            validators=[MinValueValidator(0.0,), MaxValueValidator(58)],
 
     )
     
@@ -56,8 +54,8 @@ class Productos(models.Model):
     @staticmethod
     def get_info():
         try:
-            usuarios = Productos.objects.all().order_by('id')
-            return usuarios
+            productos = Productos.objects.all().order_by('id')
+            return productos
         except Productos.DoesNotExist:
             return None
 
