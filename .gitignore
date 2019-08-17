@@ -17,3 +17,6 @@ HuronShop/__pycache__/urls.cpython-36.pyc
 apps/clientes/__pycache__/admin.cpython-36.pyc
 apps/clientes/__pycache__/__init__.cpython-36.pyc
 apps/clientes/__pycache__/models.cpython-36.pyc
+0001_initial.py
+apps/accounts/migrations/0001_initial.py
+apps/clientes/migrations/0001_initial.py

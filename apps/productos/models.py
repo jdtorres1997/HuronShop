@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from apps.Lineas.models import *
+from django.core.validators import MaxValueValidator, MinValueValidator
 
-"""
 class Productos(models.Model):
 
     foto = models.ImageField(
-        upload_to='media', verbose_name="Imagenes de Muestra:")
+        upload_to='media', 
+        verbose_name="Imagenes de Muestra:"
+    )
     name = models.CharField("Nombre del producto:",max_length=75)
     linea = models.ForeignKey(
         Linea,
@@ -18,22 +20,38 @@ class Productos(models.Model):
         related_query_name="linea", 
         to_field='name'
     )
-    #etiquetas = models.
+    etiquetas = models.TextField(
+        verbose_name="Etiquetas relacionadas con el producto",      
+        help_text="Añade aqui las etiquetas que estan relacionadas con tu producto",
+        blank=True,
+        )
 
+    precio = models.FloatField(
+            validators=[MinValueValidator(0.0,message="El valor minimo del oriducto no puede ser negativo"), MaxValueValidator(58)],
 
+    )
+    
+    extraPueno = 'XS'
+    pequeno = 'S'
+    mediano = 'M'
+    grande = 'L'
+    SIZES_CHOICES = [
+        (extraPueno, 'XS'),
+        (pequeno, 'S'),
+        (mediano, 'M'),
+        (grande, 'L'),
+    ]
 
-    cedula = models.CharField(verbose_name="Cédula", max_length=11, unique=True)
-
-
-
-    telefono = models.CharField(verbose_name="Teléfono", max_length=11)
-    cedula = models.CharField(verbose_name="Cédula", max_length=11, unique=True)
-
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'cedula', 'email', 'is_active', 'telefono']
-    USERNAME_FIELD = 'username'
+    tallas = models.CharField(
+        max_length=4,
+        choices=SIZES_CHOICES,
+        default = mediano,
+    )
+   
+    REQUIRED_FIELDS = ['name', 'linea', 'precio', 'tallas']
 
     def __str__(self):
-        return self.cedula + ' - ' + self.get_full_name()
+        return self.name + ' - ' + self.linea()
     
     @staticmethod
     def get_info():
@@ -42,4 +60,7 @@ class Productos(models.Model):
             return usuarios
         except Productos.DoesNotExist:
             return None
-"""
+
+#Productos._meta.get_field('precio').MinValueValidator(0,message="El valor minimo del oriducto no puede ser negativo")
+Productos._meta.get_field('tallas').help_text = "Selecciona todas las opcines de tllas en las cuales este producto estara disponible"
+Productos._meta.get_field('precio').help_text = "Define un valor de venta para este"
