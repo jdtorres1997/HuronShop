@@ -9,19 +9,20 @@ from apps.productos.forms import *
 from apps.productos.models import *
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def Add_product(request):
 	if(request.method == 'POST'):
 		form = Product_form(request.POST)
 		if form.is_valid():
-			linea = form.save()
-			linea.save()
-			return  redirect('/lineas')
+			lineas = form.save()
+			lineas.save()
+			return redirect('/lineas')
 	else:
 		form = Product_form()
 		template = loader.get_template('add_product.html')
 		context = {
-			'form' : form,
+			'form': form,
 		}
 		return HttpResponse(template.render(context, request))
 """

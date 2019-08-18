@@ -5,9 +5,7 @@ from multiselectfield import MultiSelectField
 
 class Productos(models.Model):
 
-    foto = models.ImageField(
-        verbose_name="Imagenes de Muestra:"
-    )
+    models.ImageField(upload_to='productos/', null=True, blank=True, default='/productos/default.jpg')
     name = models.CharField("Nombre del producto:",max_length=75)
     linea = models.ForeignKey(
         Linea,
