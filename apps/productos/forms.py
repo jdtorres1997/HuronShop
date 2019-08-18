@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import *
+from apps.productos.models import *
 
 class Product_form(ModelForm):
     class Meta:
