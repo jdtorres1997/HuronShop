@@ -1,11 +1,11 @@
 from django.db import models
 from apps.Lineas.models import *
 from django.core.validators import MaxValueValidator, MinValueValidator
+from multiselectfield import MultiSelectField
 
 class Productos(models.Model):
 
     foto = models.ImageField(
-        upload_to='media', 
         verbose_name="Imagenes de Muestra:"
     )
     name = models.CharField("Nombre del producto:",max_length=75)
@@ -40,10 +40,10 @@ class Productos(models.Model):
         (grande, 'L'),
     ]
 
-    tallas = models.CharField(
-        max_length=4,
+    tallas = MultiSelectField(
         choices=SIZES_CHOICES,
-        default = mediano,
+        max_choices=4,
+        max_length=4
     )
    
     REQUIRED_FIELDS = ['name', 'linea', 'precio', 'tallas']
