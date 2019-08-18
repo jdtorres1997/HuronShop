@@ -5,8 +5,8 @@ from multiselectfield import MultiSelectField
 
 class Productos(models.Model):
 
-    models.ImageField(upload_to='productos/', null=True, blank=True, default='/productos/default.jpg')
-    name = models.CharField("Nombre del producto:",max_length=75)
+    foto = models.ImageField(upload_to = "productos/",null=True, blank=True)
+    nombre = models.CharField("Nombre del producto:",max_length=75)
     linea = models.ForeignKey(
         Linea,
         on_delete= models.PROTECT,
@@ -41,13 +41,13 @@ class Productos(models.Model):
     tallas = MultiSelectField(
         choices=SIZES_CHOICES,
         max_choices=4,
-        max_length=4
+        max_length=50
     )
    
-    REQUIRED_FIELDS = ['name', 'linea', 'precio', 'tallas']
+    REQUIRED_FIELDS = ['nombre', 'linea', 'precio', 'tallas']
 
     def __str__(self):
-        return self.name + ' - ' + self.linea()
+        return self.nombre + ' - ' + str(self.linea)
     
     @staticmethod
     def get_info():
