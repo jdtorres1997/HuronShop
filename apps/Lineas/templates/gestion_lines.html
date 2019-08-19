@@ -20,7 +20,7 @@
 </style>
 {% endblock css %}
 
-{% block contenido %}
+{% block contenido_panel %}
 
 <div class="col-md-12">
     <div class="box box-primary">
@@ -50,14 +50,14 @@
                         {% endif %}
                     </td>
                     <td class="col-md-3">
-                    <div class="col-md-6">
-                      <a href="edit/{{line.id}}" type="submit" class="btn btn-info btn-raised btn-xs">Editar</a>
-                    </div>
-                    <div  class="col-md-6">
-                    <a href="see/{{line.id}}" type="submit" class="btn btn-info btn-raised btn-xs">Ver</a>
-                    </div>
+                        <div class="col-md-6">
+                            <a href="edit/{{line.id}}" type="submit" class="btn btn-info btn-raised btn-xs btn-block">Editar</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="see/{{line.id}}" type="submit" class="btn btn-info btn-raised btn-xs btn-block">Ver</a>
+                        </div>
                     </td>
-                </tr>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
@@ -78,7 +78,7 @@
 
 
 
-{% endblock contenido %}
+{% endblock contenido_panel %}
 
 {% block js %}
 

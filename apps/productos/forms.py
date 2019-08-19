@@ -4,5 +4,5 @@ from apps.productos.models import *
 
 class Product_form(ModelForm):
     class Meta:
-        model = Productos
+        model = Producto
         fields = '__all__'

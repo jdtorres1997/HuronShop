@@ -3,7 +3,7 @@ from apps.Lineas.models import *
 from django.core.validators import MaxValueValidator, MinValueValidator
 from multiselectfield import MultiSelectField
 
-class Productos(models.Model):
+class Producto(models.Model):
 
     foto = models.ImageField(upload_to = "productos/",null=True, blank=True)
     nombre = models.CharField("Nombre del producto:",max_length=75)
@@ -22,8 +22,8 @@ class Productos(models.Model):
         blank=True,
         )
 
-    precio = models.FloatField(
-            validators=[MinValueValidator(0.0,), MaxValueValidator(58)],
+    precio = models.IntegerField(
+            MinValueValidator(0, "El valor minimo de un producto no puede ser menor a 0"),
 
     )
     
@@ -52,11 +52,11 @@ class Productos(models.Model):
     @staticmethod
     def get_info():
         try:
-            productos = Productos.objects.all().order_by('id')
+            productos = Producto.objects.all().order_by('id')
             return productos
-        except Productos.DoesNotExist:
+        except Producto.DoesNotExist:
             return None
 
-#Productos._meta.get_field('precio').MinValueValidator(0,message="El valor minimo del oriducto no puede ser negativo")
-Productos._meta.get_field('tallas').help_text = "Selecciona todas las opcines de tllas en las cuales este producto estara disponible"
-Productos._meta.get_field('precio').help_text = "Define un valor de venta para este"
+#Producto._meta.get_field('precio').MinValueValidator(0,message="El valor minimo del oriducto no puede ser negativo")
+Producto._meta.get_field('tallas').help_text = "Selecciona todas las opcines de tllas en las cuales este producto estara disponible"
+Producto._meta.get_field('precio').help_text = "Define un valor de venta para este"

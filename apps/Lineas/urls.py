@@ -2,6 +2,8 @@ from django.urls import path
 
 from apps.Lineas.views import *
 
+app_name = 'lineas'
+
 urlpatterns = [
     path('', Manage_lines, name='manage_lines'),  
     path('add', Add_line, name='add_line'),
