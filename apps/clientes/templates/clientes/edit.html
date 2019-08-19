@@ -7,7 +7,7 @@
 {% block descripcion_pagina %} Editar cliente HURON SHOP {% endblock descripcion_pagina %}
 {% block miga_pan %}
 <li><a href="{% url 'accounts:home'%}"><i class="fa fa-dashboard"></i> DASHBOARD</a></li>
-<li><a href="{% url 'accounts:gestion'%}"></i> GESTIONAR CLIENTES</a></li>
+<li><a href="{% url 'clientes:gestion'%}"></i> GESTIONAR CLIENTES</a></li>
 <li class="active">EDITAR CLIENTE</li>
 {% endblock miga_pan %}
 
@@ -33,29 +33,30 @@
         <div class="box-body">
             <form method="post" id="formulario" onsubmit="return validacion()" autocomplete="off"> {% csrf_token %}
 
-                    <div class="row">
-                        <div class="col-md-4 col-md-offset-2">
-                            {% bootstrap_field form.first_name%}
-                        </div>
-                        <div class="col-md-4">
-                            {% bootstrap_field form.last_name%}
-                        </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        {% bootstrap_field form.first_name%}
                     </div>
-                    <div class="row">
-                        <div class="col-md-4 col-md-offset-2">
-                            {% bootstrap_field form.direccion%}
-                        </div>
-                        <div class="col-md-4">
-                            {% bootstrap_field form.telefono%}
-                        </div>
+                    <div class="col-md-4">
+                        {% bootstrap_field form.last_name%}
                     </div>
-    
-                    <div class="row">
-                        <div class="col-md-4 col-md-offset-2">
-                            {% bootstrap_field form.email%}
-                        </div>
-                        
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        {% bootstrap_field form.direccion%}
                     </div>
+                    <div class="col-md-4">
+                        {% bootstrap_field form.telefono%}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        {% bootstrap_field form.email%}
+                    </div>
+                    
+                </div>
+                <hr>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-2 text-center">
                         <button type="submit" class="btn btn-success btn-raised" id="registrar">Guardar</button>

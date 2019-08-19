@@ -93,3 +93,16 @@ class ClienteEditForm(ModelForm):
             self.add_error('direccion','Dirección deber ser entre 3 y 50 caracteres')
 
         return self.cleaned_data
+
+class ClienteConsultForm(ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ('first_name', 'last_name', 'cedula', 'direccion')
+
+    def __init__(self, *args, **kwargs):
+        super(ClienteConsultForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['first_name', 'last_name', 'cedula', 'direccion']:
+            self.fields[fieldname].required = False
+            self.fields[fieldname].help_text = None
+            self.fields[fieldname].widget.attrs['placeholder'] = ''
