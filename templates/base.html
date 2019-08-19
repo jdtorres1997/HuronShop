@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,14 +28,14 @@
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
 
     
     {{ form.media.css }}
     {% block css %}{% endblock css %}
 </head>
 <body class="hold-transition skin-yellow-light sidebar-mini sidebar-collapse layout-boxed" 
-    style="background-image:url({% static 'img/fondo.png' %})">
+    style="background-image:url({% static 'img/fondo.jpg' %})">
 <div class="wrapper">
 
     <!-- Main Header -->
