@@ -29,8 +29,8 @@
 
 <div class="col-md-12" ng-controller="pedidos_controller">
     <div class="box box-primary">
-        <div class="box-header" ng-init="prueba();">
-            <h3 class="box-title">Registrar pedidos {{ nombre_prueba }}</h3>
+        <div class="box-header">
+            <h3 class="box-title">Registrar pedidos</h3>
         </div>
         <div class="box-body">
             <form method="post" id="formulario" onsubmit="return validacion()" action="{% url 'pedidos:crear_pedido' %}" autocomplete="off"> {% csrf_token %}
@@ -57,7 +57,7 @@
                         {% bootstrap_field form.estado_pago %}
                     </div>
                     <div class="col-md-4">
-                        
+                        <input type="text" name="fname" ng-model="nombre_prueba">
                     </div>
                     
                 </div>
@@ -69,7 +69,11 @@
                     <div class="col-md-4 text-center">
                         <a class="btn btn-danger btn-raised" href="/pedidos" role="button"><span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</a>
                     </div>
+                    <div class="col-md-4 text-center">
+                        <a class="btn btn-danger btn-raised" ng-click="prueba();" role="button"><span class="glyphicon glyphicon-remove"></span>&nbsp Mostrar</a>
+                    </div>
                 </div>
+                <input id="movimientos" name="movimientos" type="hidden" ng-value="nombre_prueba">
             </form>
         </div>
     </div>
@@ -108,7 +112,8 @@
     $(function () {
         $('#id_fecha_entrega').datepicker({
             autoclose: true,
-            format: 'dd/mm/yyyy',
+            //format: 'dd/mm/yyyy',
+            format: 'yyyy-mm-dd',
             language: 'es',
             orientation: 'bottom',
             startDate: '+0d'

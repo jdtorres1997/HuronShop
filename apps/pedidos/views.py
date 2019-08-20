@@ -5,6 +5,7 @@ from apps.pedidos.models import *
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.db.models import Max
 
 
 @login_required
@@ -21,8 +22,17 @@ def add_pedido(request):
 		form = Pedido_form(request.POST)
 		if form.is_valid():
 			messages.success(request, 'pedido registrado exitosamente')
-			user = form.save(commit=False)
-			user.save()
+			pedido = form.save(commit=False)
+			#---Agregar consecutivo de venta---
+			max = Pedido.objects.all().aggregate(Max('consecutivo'))
+			if max['consecutivo__max'] is not None:
+				pedido.consecutivo = max["consecutivo__max"] + 1
+			else:
+				pedido.consecutivo = 1
+			pedido.no_pedido = "PED-" + str(pedido.consecutivo).zfill(5)
+
+			pedido.save()
+			print("----request---", request.POST)
 			return redirect('pedidos:gestion')
 		else:
 			messages.error(request, 'Por favor corrige los errores')

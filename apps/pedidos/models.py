@@ -19,9 +19,8 @@ class Pedido(models.Model):
         related_query_name="cliente", 
     )
 
-    total_compra = models.IntegerField(
-            MinValueValidator(0, "El valor minimo de un producto no puede ser menor a 0"),
-    )
+    #total_compra = models.IntegerField(MinValueValidator(0, "El valor minimo de un producto no puede ser menor a 0"))
+    total_compra = models.IntegerField(null=True)
 
     ESTADO_PEDIDO_CHOICES = [
         ('en_proceso', 'En proceso'),
