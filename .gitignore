@@ -20,3 +20,4 @@ apps/clientes/__pycache__/models.cpython-36.pyc
 0001_initial.py
 apps/accounts/migrations/0001_initial.py
 apps/clientes/migrations/0001_initial.py
+apps/compras/__init__.py

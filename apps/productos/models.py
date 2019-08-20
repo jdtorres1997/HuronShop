@@ -57,6 +57,11 @@ class Producto(models.Model):
         except Producto.DoesNotExist:
             return None
 
-#Producto._meta.get_field('precio').MinValueValidator(0,message="El valor minimo del oriducto no puede ser negativo")
-Producto._meta.get_field('tallas').help_text = "Selecciona todas las opcines de tllas en las cuales este producto estara disponible"
-Producto._meta.get_field('precio').help_text = "Define un valor de venta para este"
+Producto._meta.get_field('tallas').help_text = "Selecciona todas las opciones de tallas en las cuales este producto estara disponible"
+Producto._meta.get_field('precio').help_text = "Define un valor de venta para este producto"
+Producto._meta.get_field('precio').verbose_name= "precio"
+Producto._meta.get_field('linea').verbose_name= "linea relacionada con el producto"
+
+
+
+            

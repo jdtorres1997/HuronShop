@@ -45,6 +45,7 @@ def Edit_product(request, id):
 	producto = Producto.objects.get(id=id)
 	if request.method == 'POST':
 		form = Product_form(request.POST, request.FILES, instance=producto)
+		print(form.fields['tallas'])
 		if form.is_valid():
 			form.save()
 			return redirect('/productos')
@@ -93,7 +94,6 @@ def Consult_product(request):
 				nombre__icontains=form.cleaned_data['nombre'],
 				linea__name__icontains = nombre_linea,
 				etiquetas__icontains=form.cleaned_data['etiquetas'] ,
-				#tallas__icontains =  form.cleaned_data['tallas'] ,
 				)
 			busqueda = Producto.objects.none()
 			if form.cleaned_data['tallas'] :
