@@ -48,12 +48,9 @@ def Edit_line(request, id):
 def See_line(request, id):
 	linea = Linea.objects.get(id=id)
 	if request.method == 'GET':
-		form = Line_form(instance=linea)
 		template = loader.get_template('see_line.html')
-		form.fields['name'].widget.attrs['disabled'] = 'disabled'
-		form.fields['description'].widget.attrs['disabled'] = 'disabled'
 		context = {
-			'form': form,
+			'linea': linea,
 			'linea': linea,
 		}
 		return HttpResponse(template.render(context, request))

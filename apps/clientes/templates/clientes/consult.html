@@ -33,7 +33,7 @@
             </div>
             <div class="box-body">
                 <form method="post" id="formulario" action="{% url 'clientes:consultar_cliente' %}" autocomplete="off"> {% csrf_token %}
-    
+     
                     <div class="row">
                         <div class="col-md-4 col-md-offset-2">
                             {% bootstrap_field form.first_name%}
@@ -90,7 +90,7 @@
                     <td>{{ cliente.last_name }}</td>
                     <td>{{ cliente.email }}</td>
                     <td>{{ cliente.cedula }}</td>
-                    <td>{{ cliente.telefono }}</td>
+                    <td>{{ cliente.telefono }}</td> 
                     <td class="col-sm-1 col-lg-2" style="padding: 0">
                         <div class="col-sm-8 col-lg-4" style="padding: 2px">
                             <a href="edit/{{cliente.id}}" type="submit" class="btn btn-primary btn-raised btn-sm btn-block" title="Editar"> <span class="glyphicon glyphicon-pencil"></span></a>
@@ -118,7 +118,7 @@
         </div>
     </div>
 </div>
-{% endif %}
+{% endif %} 
 
 
 

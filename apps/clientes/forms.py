@@ -6,7 +6,7 @@ from apps.clientes.models import *
 from django import forms 
 import re
 
-class ClienteAddForm(ModelForm):
+class ClienteAddForm(ModelForm): 
     class Meta:
         model = Cliente
         fields = ('first_name', 'last_name', 'cedula', 'email', 'telefono', 'direccion')
