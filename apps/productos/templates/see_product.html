@@ -30,12 +30,12 @@
 {% block contenido_panel %}
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                    <p class="text-center">
-                        <img src="{{producto.foto.url}}" width="100%" height="100%" alt="">
-                    </p>
-            </div>
+    <div class="row text-center">
+        <div class="col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 text-center">
+            <p class="text-center">
+                <img src="{{producto.foto.url}}" width="100%" height="100%" alt="">
+            </p>
+        </div>
     </div>
     <br>
     <div class="row">
@@ -46,20 +46,20 @@
             <p>{{ producto.nombre }}</p>
         </div>
         <div class="col-md-4 ">
-                <label>
-                    Linea del producto
-                </label>
-                <p>{{ producto.linea }}</p>
-            </div>
+            <label>
+                Linea del producto
+            </label>
+            <p>{{ producto.linea }}</p>
+        </div>
     </div>
     <br>
     <div class="row">
-            <div class="col-md-4 col-md-offset-2">
-                    <label>
-                        Etiquetas del prodcuto
-                    </label>
-                    <p>{{ producto.etiquetas }}</p>
-                </div>
+        <div class="col-md-4 col-md-offset-2">
+            <label>
+                Etiquetas del prodcuto
+            </label>
+            <p>{{ producto.etiquetas }}</p>
+        </div>
         <div class="col-md-4 ">
             <label>
                 Precio del producto
@@ -67,22 +67,23 @@
             <p>{{ producto.precio }}</p>
         </div>
     </div>
+    <br>
     <div class="row">
-            <div class="col-md-4 col-md-offset-2">
-                <label>
-                    Tallas del producto
-                </label>
-                <p style="word-wrap: break-word"></p>
-                {% for t in tallas %}
-                <span class="label label-default">{{ t }}</span>
-                {% endfor %}
-                </p>
-            </div>
+        <div class="col-md-4 col-md-offset-2">
+            <label>
+                Tallas del producto
+            </label>
+            <p style="word-wrap: break-word"></p>
+            {% for t in tallas %}
+            <span class="label label-default">{{ t }}</span>
+            {% endfor %}
+            </p>
+        </div>
     </div>
     <hr>
     <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
-            <a class="btn btn-danger btn-raised" href="{% url 'productos:manage' %}" role="button">Volver</a>
+            <a class="btn btn-primary btn-raised" href="{% url 'productos:manage' %}" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp Volver</a>
         </div>
 </form>
 {% endblock contenido_panel %}

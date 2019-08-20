@@ -48,10 +48,10 @@
         </div>
         <div class="row">
             <div class="col-md-3 col-md-offset-3 text-center">
-                <button type="submit" name="_submit" id="buscar" class="btn btn-success btn-raised">Continuar</button>
+                <button type="submit" class="btn btn-success btn-raised" id="consultar"><span class="glyphicon glyphicon-ok"></span>&nbsp Continuar</button>
             </div>
             <div class="col-md-3 text-center">
-                <a class="btn btn-danger btn-raised" href="{% url 'productos:manage' %}" role="button">Cancelar</a>
+                <a class="btn btn-danger btn-raised" href="{% url 'productos:manage' %}" role="button"><span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</a>
             </div>
     </form>
     {%else%}
@@ -82,12 +82,10 @@
 
                             <td class="col-md-3">
                                 <div class="col-md-6">
-                                    <a href="{% url 'productos:edit' product.id %}" type="submit"
-                                        class="btn btn-info btn-raised btn-xs" title="click here">Editar</a>
+                                    <a href="{% url 'productos:edit' product.id %}" type="submit" class="btn btn-primary btn-raised btn-sm btn-block" title="Editar"> <span class="glyphicon glyphicon-pencil"></span></a>
                                 </div>
                                 <div class="col-md-6">
-                                    <a href="{% url 'productos:see' product.id %}" type="submit"
-                                        class="btn btn-info btn-raised btn-xs " title="click here">Ver</a>
+                                    <a href="{% url 'productos:see' product.id %}" type="submit" class="btn btn-warning btn-raised btn-sm btn-block" title="Eliminar"> <span class="glyphicon glyphicon-trash"></span></a>
                                 </div>
                             </td>
                         </tr>
@@ -99,11 +97,7 @@
             <div class="box-footer">
                 <div class="row">
                     <div class="col-md-6 text-right">
-                        <a class="btn btn-success btn-raised" href="{% url 'productos:add' %}" role="button">Añadir</a>
-                    </div>
-                    <div class="col-md-6 text-left">
-                        <a class="btn btn-success btn-raised" href="{% url 'productos:consult' %}"
-                            role="button">Busqueda Avanzada</a>
+                        <a class="btn btn-primary btn-raised" href="{% url 'productos:manage' %}" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp Volver</a>
                     </div>
                 </div>
             </div>

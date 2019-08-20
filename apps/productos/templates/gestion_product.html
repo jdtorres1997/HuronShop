@@ -51,11 +51,13 @@
                         <td class="col-md-3">
                             <div class="col-md-6">
                                 <a href="{% url 'productos:edit' product.id %}" type="submit"
-                                    class="btn btn-info btn-raised btn-xs" title="click here">Editar</a>
+                                    class="btn btn-primary btn-raised btn-sm btn-block" title="Editar"><span
+                                        class="glyphicon glyphicon-pencil"></span></a>
                             </div>
                             <div class="col-md-6">
-                                <a href="{% url 'productos:see' product.id %}" type="submit"
-                                    class="btn btn-info btn-raised btn-xs " title="click here">Ver</a>
+                                <a href="{% url 'productos:see' product.id %}" type="submit" type="submit"
+                                    class="btn btn-info btn-raised btn-sm btn-block" title="Ver"><span
+                                        class="glyphicon glyphicon-eye-open"></span></a>
                             </div>
                         </td>
                     </tr>
@@ -67,10 +69,12 @@
         <div class="box-footer">
             <div class="row">
                 <div class="col-md-6 text-right">
-                    <a class="btn btn-success btn-raised" href="{% url 'productos:add' %}" role="button">Añadir</a>
+                    <a href="{% url 'productos:add' %}" class="btn btn-success btn-raised" role="button"><span
+                            class="glyphicon glyphicon-plus"></span>&nbsp Añadir</a>
                 </div>
                 <div class="col-md-6 text-left">
-                    <a class="btn btn-success btn-raised" href="{% url 'productos:consult' %}" role="button">Busqueda Avanzada</a>
+                    <a href="{% url 'productos:consult' %}" class="btn btn-success btn-raised" role="button"><span
+                            class="glyphicon glyphicon-search"></span>&nbsp Busqueda avanzada</a>
                 </div>
             </div>
         </div>
