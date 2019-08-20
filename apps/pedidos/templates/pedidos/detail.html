@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+ 
+{% block titulo %}Gestión de pedidos{% endblock titulo %}
+{% block descripcion_pagina %} Detalle pedido HURON SHOP {% endblock descripcion_pagina %}
+{% block miga_pan %}
+<li><a href="{% url 'accounts:home'%}"><i class="fa fa-dashboard"></i> DASHBOARD</a></li>
+<li><a href="{% url 'pedidos:gestion'%}"></i> GESTIONAR PEDIDOS</a></li>
+<li class="active">DETALLE PEDIDO</li>
+{% endblock miga_pan %}
+
+{% block css %}
+<link rel="stylesheet" href="{%  static 'bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
+<link href="{% static 'bower_components/datatables.net-bs/responsive/responsive.dataTables.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+{{ form_empleado.media.css }}
+<style media="screen">
+    .select2-container {
+        width: 100% !important;
+    }
+</style>
+{% endblock css %}
+
+{% block contenido %}
+
+<div class="col-md-12">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Detalle pedido</h3>
+        </div>
+        <div class="box-body">
+            
+
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        <label>
+                            Cliente
+                        </label>
+                        <p>
+                            {{pedido.cliente}}
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>
+                            Dirección de entrega
+                        </label>
+                        <p>
+                            {{pedido.direccion}}
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <!--Tabla-->
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col-md-4">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Costo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in mvtos %}
+                                <tr>
+                                    <td class="col-md-4">
+                                        {{ item.producto }}
+                                    </td>
+                                    <td>
+                                        {{ item.cantidad }}
+                                    </td>
+                                    <td>
+                                        {{ item.precio }}
+                                    </td>
+                                    <td>
+                                        {{ item.costo }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                <tr>
+                                    <td colspan="3" style="text-align: right;">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td colspan="3">
+                                        {{pedido.total_compra|default:"0"}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <br>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        <label>
+                            Fecha de entrega
+                        </label>
+                        <p>
+                            {{pedido.fecha_entrega}}
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <label>
+                            Estado pedido
+                        </label>
+                        <p>
+                            {{pedido.estado_pedido}}
+                        </p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        <label>
+                            Estado pago
+                        </label>
+                        <p>
+                            {{pedido.estado_pago}}
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="row">
+                    
+                    <div class="col-md-4 text-center col-md-offset-4">
+                        <a class="btn btn-primary btn-raised" href="/pedidos" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp Volver</a>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+
+{% block js %}
+
+<script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/responsive/dataTables.responsive.min.js' %}"></script>
+
+<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+
+<script>
+    {% for msg in messages %}
+    $(document).ready(function () {
+        setTimeout(function () {
+            toastr.options = {
+                "closeButtons": true,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "showEasing": "swing",
+                "extendedTimeOut": 5000,
+                "timeOut": 4000
+            }
+            toastr["{{ msg.tags }}"]("{{ msg }}")
+        }, 500);
+    });
+    {% endfor %}
+</script>
+
+{% endblock js %}

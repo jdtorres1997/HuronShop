@@ -27,7 +27,7 @@
 
 {% block contenido %}
 
-<div class="col-md-12" ng-controller="pedidos_controller">
+<div class="col-md-12" ng-controller="pedidos_controller" ng-init="init_productos({{productos}});">
     <div class="box box-primary">
         <div class="box-header">
             <h3 class="box-title">Registrar pedidos</h3>
@@ -43,6 +43,60 @@
                         {% bootstrap_field form.direccion %}
                     </div>
                 </div>
+                <br>
+                <!--Tabla-->
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col-md-4">Producto</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Costo</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in mvtos_pedido track by $index">
+                                    <td class="col-md-4">
+                                        <div class="col-md-12">
+                                        <select class="form-control input-md" ng-change="asignarPrecio(item)" ng-model="item.producto" ng-options="p.id as p.nombre for p in productos_list">
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="cantidad" class="form-control" ng-model="item.cantidad">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="precio" disabled="" class="form-control" ng-model="item.precio">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="costo" class="form-control" ng-model="item.costo" ng-change="actualizar_total();">
+                                    </td>
+                                    <td style="padding-top: 4%; text-align:center">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer;" ng-click="delItem(item)" data-toggle="tooltip" title="Eliminar">                       
+                                            </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="padding-top: 4%; text-align: right;">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td colspan="1">
+                                            <input type="number" name="precio_total" disabled="" class="form-control" ng-model="precio_total">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-8 text-center">
+                        <a class="btn btn-success btn-raised" ng-click="addItem();" role="button"><span class="glyphicon glyphicon-plus"></span>&nbsp Agregar Item</a>
+                    </div>
+                </div>
+                <br>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-2">
                         {% bootstrap_field form.fecha_entrega %}
@@ -56,11 +110,9 @@
                     <div class="col-md-4 col-md-offset-2">
                         {% bootstrap_field form.estado_pago %}
                     </div>
-                    <div class="col-md-4">
-                        <input type="text" name="fname" ng-model="nombre_prueba">
-                    </div>
                     
                 </div>
+
                 <hr>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-2 text-center">
@@ -69,11 +121,8 @@
                     <div class="col-md-4 text-center">
                         <a class="btn btn-danger btn-raised" href="/pedidos" role="button"><span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</a>
                     </div>
-                    <div class="col-md-4 text-center">
-                        <a class="btn btn-danger btn-raised" ng-click="prueba();" role="button"><span class="glyphicon glyphicon-remove"></span>&nbsp Mostrar</a>
-                    </div>
                 </div>
-                <input id="movimientos" name="movimientos" type="hidden" ng-value="nombre_prueba">
+                <input type="hidden" name="mvtos" value="{$mvtos_pedido$}" />
             </form>
         </div>
     </div>

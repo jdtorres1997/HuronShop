@@ -56,6 +56,14 @@ class Producto(models.Model):
             return productos
         except Producto.DoesNotExist:
             return None
+    
+    @staticmethod
+    def get_array_productos():
+        try:
+            productos = list(Producto.objects.all().order_by('id').values())
+            return productos
+        except Producto.DoesNotExist:
+            return None
 
 Producto._meta.get_field('tallas').help_text = "Selecciona todas las opciones de tallas en las cuales este producto estara disponible"
 Producto._meta.get_field('precio').help_text = "Define un valor de venta para este producto"

@@ -1,5 +1,6 @@
 from django.db import models
 from apps.clientes.models import *
+from apps.productos.models import *
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
@@ -23,9 +24,9 @@ class Pedido(models.Model):
     total_compra = models.IntegerField(null=True)
 
     ESTADO_PEDIDO_CHOICES = [
-        ('en_proceso', 'En proceso'),
-        ('listo', 'Listo'),
-        ('entregado', 'Entregado'),
+        ('En proceso', 'En proceso'),
+        ('Listo', 'Listo'),
+        ('Entregado', 'Entregado'),
     ]
     estado_pedido = models.CharField(
         max_length=10,
@@ -33,11 +34,11 @@ class Pedido(models.Model):
         default='en_proceso',
     )
     ESTADO_PAGO_CHOICES = [
-        ('no', 'No pagado'),
-        ('si', 'Pagado'),
+        ('No pagado', 'No pagado'),
+        ('Pagado', 'Pagado'),
     ]
     estado_pago = models.CharField(
-        max_length=2,
+        max_length=10,
         choices=ESTADO_PAGO_CHOICES,
         default='no',
     )
@@ -53,3 +54,24 @@ class Pedido(models.Model):
             return productos
         except Pedido.DoesNotExist:
             return None
+
+class MvtoPedido(models.Model):
+    producto = models.ForeignKey(
+        Producto,
+        on_delete= models.PROTECT,
+        # Usar para hacer querys con filtro desde el modelo de clientes
+        # https://docs.djangoproject.com/en/2.2/ref/models/fields/#django.db.models.ForeignKey.related_query_name
+        related_name="productos", 
+        related_query_name="producto", 
+    )
+    pedido = models.ForeignKey(
+        Pedido,
+        on_delete= models.PROTECT,
+        # Usar para hacer querys con filtro desde el modelo de clientes
+        # https://docs.djangoproject.com/en/2.2/ref/models/fields/#django.db.models.ForeignKey.related_query_name
+        related_name="pedidos", 
+        related_query_name="pedido", 
+    )
+    cantidad = models.IntegerField(default=0)
+    costo = models.IntegerField(default=0)
+    precio = models.IntegerField(default=0)
