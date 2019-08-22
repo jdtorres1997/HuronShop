@@ -28,7 +28,7 @@
 <div class="col-md-12">
     <div class="box box-primary">
         <div class="box-header">
-            <h3 class="box-title">Detalle pedido</h3>
+            <h3 class="box-title">Detalle pedido {{pedido.no_pedido}}</h3>
         </div>
         <div class="box-body">
             
@@ -49,49 +49,6 @@
                         <p>
                             {{pedido.direccion}}
                         </p>
-                    </div>
-                </div>
-                <br>
-                <!--Tabla-->
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <table class="table table-bordered">
-                            <thead>
-                            <tr>
-                                <th scope="col-md-4">Producto</th>
-                                <th scope="col">Cantidad</th>
-                                <th scope="col">Precio</th>
-                                <th scope="col">Costo</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in mvtos %}
-                                <tr>
-                                    <td class="col-md-4">
-                                        {{ item.producto }}
-                                    </td>
-                                    <td>
-                                        {{ item.cantidad }}
-                                    </td>
-                                    <td>
-                                        {{ item.precio }}
-                                    </td>
-                                    <td>
-                                        {{ item.costo }}
-                                    </td>
-                                </tr>
-                                {% endfor %}
-
-                                <tr>
-                                    <td colspan="3" style="text-align: right;">
-                                        <strong>Total</strong>
-                                    </td>
-                                    <td colspan="3">
-                                        {{pedido.total_compra|default:"0"}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
 
@@ -128,6 +85,56 @@
                         
                     </div>
                     
+                </div>
+                 <!--Tabla-->
+                 <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col-md-4">Producto</th>
+                                <th scope="col">Talla</th>
+                                <th scope="col">Color</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Costo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in mvtos %}
+                                <tr>
+                                    <td class="col-md-4">
+                                        {{ item.producto }}
+                                    </td>
+                                    <td>
+                                        {{ item.talla }}
+                                    </td>
+                                    <td>
+                                        {{ item.color }}
+                                    </td>
+                                    <td>
+                                        {{ item.cantidad }}
+                                    </td>
+                                    <td>
+                                        {{ item.precio }}
+                                    </td>
+                                    <td>
+                                        {{ item.costo }}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+
+                                <tr>
+                                    <td colspan="5" style="text-align: right;">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td colspan="1">
+                                        {{pedido.total_compra|default:"0"}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <hr>
                 <div class="row">

@@ -24,23 +24,26 @@ class Pedido(models.Model):
     total_compra = models.IntegerField(null=True)
 
     ESTADO_PEDIDO_CHOICES = [
+        ('', ''),
         ('En proceso', 'En proceso'),
         ('Listo', 'Listo'),
         ('Entregado', 'Entregado'),
+        ('Cancelado', 'Cancelado'),
     ]
     estado_pedido = models.CharField(
         max_length=10,
         choices=ESTADO_PEDIDO_CHOICES,
-        default='en_proceso',
+        default='',
     )
     ESTADO_PAGO_CHOICES = [
+        ('', ''),
         ('No pagado', 'No pagado'),
         ('Pagado', 'Pagado'),
     ]
     estado_pago = models.CharField(
         max_length=10,
         choices=ESTADO_PAGO_CHOICES,
-        default='no',
+        default='',
     )
     REQUIRED_FIELDS = ['direccion', 'cliente']
 
@@ -75,3 +78,16 @@ class MvtoPedido(models.Model):
     cantidad = models.IntegerField(default=0)
     costo = models.IntegerField(default=0)
     precio = models.IntegerField(default=0)
+    SIZES_CHOICES = [
+        ('', ''),
+        ('XS', 'XS'),
+        ('S', 'S'),
+        ('M', 'M'),
+        ('L', 'L'),
+    ]
+    talla = models.CharField(
+        max_length=2,
+        choices=SIZES_CHOICES,
+        default='',
+    )
+    color = models.CharField(verbose_name="Color", max_length=50, default='')

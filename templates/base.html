@@ -7,7 +7,7 @@
     <title>{% block titulo %} {% endblock titulo %}  | HURON SHOP</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% static 'favicon/HuronLogo.ico' %}">
     <link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
@@ -52,11 +52,18 @@
         <!-- Header Navbar -->
         <nav class="navbar navbar-static-top" style="background-color: #E8BE13;" role="navigation">
             <!-- Sidebar toggle button-->
+            <div class="col-md-1 col-sm-2 col-xs-2" style="padding: 0px">
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
+            </div> 
+            <div class="col-md-9 col-sm-8 col-xs-8 text-center">
+                <img src="{% static 'favicon/HuronLogo.ico' %}" width="60px" height="60px" alt="">
+            </div>
             <!-- Navbar Right Menu -->
+            <div class="col-md-2 col-sm-2 col-xs-2">
             {% include 'control_bar.html' %}
+            </div>
         </nav>
     </header>
     {% if user.is_staff %} {% include 'menus/menu_admin.html' %}
