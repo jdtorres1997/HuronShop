@@ -10,8 +10,8 @@ DBCONFIG['default'] = {
     'PORT': 5432, 
 }
 '''
-from dj_database_url
-from decode import config
+import dj_database_url
+from decouple import config
 
 DBCONFIG ={
     'default': dj_database_url.config(
