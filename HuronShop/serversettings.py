@@ -1,4 +1,4 @@
-
+'''
 DBCONFIG = {}
 
 DBCONFIG['default'] = {
@@ -8,4 +8,13 @@ DBCONFIG['default'] = {
     'PASSWORD': 'admin',
     'HOST': 'localhost',
     'PORT': 5432, 
+}
+'''
+from dj_database_url
+from decode import config
+
+DBCONFIG ={
+    'default': dj_database_url.config(
+        default = config('DATABASE_URL')
+    )
 }
