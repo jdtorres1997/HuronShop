@@ -1,1 +1,1 @@
-web: gunicorn HuronShop:wsgi --log-file -
+web: gunicorn HuronShop.wsgi --log-file -
