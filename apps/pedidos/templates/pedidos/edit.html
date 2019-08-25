@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+
+{% block titulo %}Gestión de Pedidos{% endblock titulo %}
+{% block descripcion_pagina %} Editar pedido HURON SHOP {% endblock descripcion_pagina %}
+{% block miga_pan %}
+<li><a href="{% url 'accounts:home'%}"><i class="fa fa-dashboard"></i> DASHBOARD</a></li>
+<li><a href="{% url 'pedidos:gestion'%}"></i> GESTIONAR PEDIDOS</a></li>
+<li class="active">EDITAR PEDIDO</li>
+{% endblock miga_pan %}
+
+{% block css %}
+<link rel="stylesheet" href="{%  static 'bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
+<link href="{% static 'bower_components/datatables.net-bs/responsive/responsive.dataTables.min.css' %}" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+<link rel="stylesheet" href="{% static 'bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/timepicker/bootstrap-timepicker.min.css' %}">
+{{ form_empleado.media.css }}
+<style media="screen">
+    .select2-container {
+        width: 100% !important;
+    }
+</style>
+{% endblock css %}
+
+{% block contenido %}
+
+<div class="col-md-12" ng-controller="pedidos_controller" ng-init="init_productos({{productos}}); init_mvtos({{mvtos}});">
+    <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Editar pedido {{pedido.no_pedido}}</h3>
+        </div>
+        <div class="box-body">
+            <form method="post" id="formulario" onsubmit="return validacion()" action="" autocomplete="off"> {% csrf_token %}
+                
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        {% bootstrap_field form.cliente %}
+                    </div>
+                    <div class="col-md-4">
+                        {% bootstrap_field form.direccion %}
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        {% bootstrap_field form.fecha_entrega %}
+                    </div>
+                    <div class="col-md-4">
+                        {% bootstrap_field form.estado_pedido %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2">
+                        {% bootstrap_field form.estado_pago %}
+                    </div>
+                    
+                </div>
+                <br>
+                <!--Tabla-->
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th scope="col-md-4">Producto</th>
+                                <th scope="col">Talla</th>
+                                <th scope="col">Color</th>
+                                <th scope="col">Cantidad</th>
+                                <th scope="col">Precio</th>
+                                <th scope="col">Costo</th>
+                                <th scope="col">Acción</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="item in mvtos_pedido track by $index">
+                                    <td class="col-md-3">
+                                        <div class="col-md-12">
+                                        <select class="form-control input-md" selected="number:1" ng-change="asignarPrecio(item)" ng-model="item.producto_id" ng-options="p.id as p.nombre for p in productos_list">
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <div class="col-md-12">
+                                        <select class="form-control input-md" ng-init="init_tallas(item);" selected="number:1" ng-model="item.talla" ng-options="p as p for p in item.tallas">
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-2">
+                                        <input type="text" name="color" class="form-control" ng-model="item.color">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="cantidad" class="form-control" ng-model="item.cantidad">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="precio" disabled="" class="form-control" ng-model="item.precio">
+                                    </td>
+                                    <td>
+                                        <input type="number" name="costo" class="form-control" ng-model="item.costo" ng-change="actualizar_total();">
+                                    </td>
+                                    <td style="padding-top: 4%; text-align:center">
+                                        <span class="glyphicon glyphicon-trash" aria-hidden="true" style="cursor: pointer;" ng-click="delItem($index, item)" data-toggle="tooltip" title="Eliminar">                       
+                                            </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" style="padding-top: 4%; text-align: right;">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td colspan="1">
+                                            <input type="number" name="precio_total" disabled="" class="form-control" ng-model="precio_total">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-2 col-md-offset-8 text-center">
+                        <a class="btn btn-success btn-raised" ng-click="addItem();" role="button"><span class="glyphicon glyphicon-plus"></span>&nbsp Agregar Item</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-2 text-center">
+                        <button type="submit" class="btn btn-success btn-raised" id="registrar"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp Guardar</button>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <a class="btn btn-danger btn-raised" href="/pedidos" role="button"><span class="glyphicon glyphicon-remove"></span>&nbsp Cancelar</a>
+                    </div>
+                </div>
+                <input type="hidden" name="mvtos" value="{$mvtos_pedido$}" />
+                <input type="hidden" name="mvtos_eliminados_pedido" value="{$mvtos_eliminados_pedido$}" />
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+
+{% block js %}
+
+<script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/responsive/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'plugins/timepicker/bootstrap-timepicker.min.js' %}"></script>
+<script src="{% static 'bower_components/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js' %}"></script>
+
+<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+
+<script>
+    {% for msg in messages %}
+    $(document).ready(function () {
+        setTimeout(function () {
+            toastr.options = {
+                "closeButtons": true,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "showEasing": "swing",
+                "extendedTimeOut": 5000,
+                "timeOut": 4000
+            }
+            toastr["{{ msg.tags }}"]("{{ msg }}")
+        }, 500);
+    });
+    {% endfor %}
+
+    $(function () {
+        $('#id_fecha_entrega').datepicker({
+            autoclose: true,
+            //format: 'dd/mm/yyyy',
+            format: 'yyyy-mm-dd',
+            language: 'es',
+            orientation: 'bottom',
+            startDate: '+0d'
+        });
+    });
+
+</script>
+
+{% endblock js %}

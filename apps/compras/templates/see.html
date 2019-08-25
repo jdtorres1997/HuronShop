@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block titulo %} Detalles de Compra {% endblock titulo %}
+{% block descripcion_pagina %} Detalles de compra {% endblock descripcion_pagina %}
+{% block miga_pan %}
+<li><a href="{% url 'accounts:home'%}"><i class="fa fa-dashboard"></i> DASHBOARD</a></li>
+<li><a href="{% url 'compras:gestion' %}"></i> GESTIONAR COMPRAS</a></li>
+<li class="active">DETALLES COMPRA</li>
+{% endblock miga_pan %}
+
+{% block css %}
+<link rel="stylesheet" href="{%  static 'bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
+<link href="{% static 'bower_components/datatables.net-bs/responsive/responsive.dataTables.min.css' %}"
+    rel="stylesheet">
+<link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+{{ form_empleado.media.css }}
+<style media="screen">
+    .select2-container {
+        width: 100% !important;
+    }
+</style>
+{% endblock css %}
+
+{% block titulo_panel %}
+<h3 class="box-title"> Detalles de compra</h3>
+{% endblock titulo_panel %}
+
+{% block contenido_panel %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <label>
+                Nombre del producto comprado
+            </label>
+            <p>{{ compra.nombre }}</p>
+        </div>
+        <div class="col-md-4 ">
+            <label>
+                Motivo de compra
+            </label>
+            <p>{{ compra.descripcion }}</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <label>
+                Estado de la compra
+            </label>
+            <p>
+                {{ compra.estado_compra }}
+            </p>
+        </div>
+        <div class="col-md-4 ">
+            <label>
+                Precio del producto
+            </label>
+            <p>{{ compra.precio }}</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <label>
+                Cantidad del producto
+            </label>
+            <p>
+                <p>{{ compra.cantidad }}</p>
+            </p>
+        </div>
+        <div class="col-md-4 ">
+                <label>
+                    Precio total de la compra
+                </label>
+                <p>{{ compra.precio_total }}</p>
+            </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <a class="btn btn-primary btn-raised" href="{% url 'compras:gestion' %}" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp Volver</a>
+        </div>
+</form>
+{% endblock contenido_panel %}
+
+{% block js %}
+
+<script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/responsive/dataTables.responsive.min.js' %}"></script>
+
+<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+
+<script>
+    {% for msg in messages %}
+    $(document).ready(function () {
+        setTimeout(function () {
+            toastr.options = {
+                "closeButtons": true,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "showEasing": "swing",
+                "extendedTimeOut": 5000,
+                "timeOut": 4000
+            }
+            toastr["{{ msg.tags }}"]("{{ msg }}")
+        }, 500);
+    });
+    {% endfor %}
+</script>
+
+{% endblock js %}
