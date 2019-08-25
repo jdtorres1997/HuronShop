@@ -1,1 +1,1 @@
-web: gunicorn HuronShop.wsgi
+web: gunicorn HuronShop.wsgi --preload
