@@ -1,24 +1,2 @@
 
-apps/*/migrations/
-**/__pycache__/
-*.log
-*.pot
-*.pyc
-*.cpython-36.pyc
-media
-.idea
-db.sqlite3
-HuronShop/__pycache__/__init__.cpython-36.pyc
-HuronShop/__pycache__/serversettings.cpython-36.pyc
-HuronShop/__pycache__/__init__.cpython-36.pyc
-HuronShop/__pycache__/serversettings.cpython-36.pyc
-HuronShop/__pycache__/settings.cpython-36.pyc
-HuronShop/__pycache__/urls.cpython-36.pyc
-apps/clientes/__pycache__/admin.cpython-36.pyc
-apps/clientes/__pycache__/__init__.cpython-36.pyc
-apps/clientes/__pycache__/models.cpython-36.pyc
-0001_initial.py
-apps/accounts/migrations/0001_initial.py
-apps/clientes/migrations/0001_initial.py
-apps/compras/__init__.py
 staticfiles/*
