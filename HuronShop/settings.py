@@ -96,11 +96,9 @@ WSGI_APPLICATION = 'HuronShop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default = config('DATABASE_URL')
-    )
-}
+DATABASES = DBCONFIG
+
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
