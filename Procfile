@@ -1,1 +1,1 @@
-web: gunicorn --log-file=- onbytes.wsgi:HuronShop
+web: gunicorn HuronShop:wsgi --log-file -
