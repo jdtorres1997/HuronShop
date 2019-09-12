@@ -1,10 +1,11 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html ng-app="HuronShopAngular" lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block titulo %} {% endblock titulo %}  | HURON SHOP</title>
+    <title>{% block titulo %} {% endblock titulo %} | HURON SHOP</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="shortcut icon" href="{% static 'favicon/HuronLogo.ico' %}">
@@ -27,45 +28,53 @@
     <link rel="stylesheet" href="{% static 'owner/styles.css' %}">
     <!-- Google Font -->
     <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
     <script src="{% static 'owner/controller.js' %}"></script>
-    
+
     {{ form.media.css }}
     {% block css %}{% endblock css %}
 </head>
-<body class="hold-transition skin-yellow-light sidebar-mini sidebar-collapse layout-boxed" 
+
+<body class="hold-transition skin-yellow-light sidebar-mini sidebar-collapse layout-boxed"
     style="background-image:url({% static 'img/fondo.jpg' %})">
-    <div id="wrapper" >
 
-    <!-- Main Header -->
-    <header class="main-header" style="background-color: #E8BE13;">
+    <div id="wrapper">
 
-        <!-- Logo -->
-        
+        <!-- Main Header -->
+        <header class="main-header" style="background-color: #E8BE13;">
 
-        <!-- Header Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #E8BE13;" role="navigation">
-            <!-- Sidebar toggle button-->
-            <div class="col-md-1 col-sm-2 col-xs-2" style="padding: 0px">
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" >
-                <span class="sr-only">Toggle navigation</span>
+            <!-- Logo -->
+            <a href="{% url 'accounts:home' %}" class="logo" style="background-color: #E8BE13;">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini" style="background-color: #E8BE13;"><b>HURON</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg" style="background-color: #E8BE13;"><b> HURON</b></span>
             </a>
-            </div> 
-            <div class="col-md-9 col-sm-8 col-xs-8 text-center">
-                <img src="{% static 'favicon/HuronLogo.ico' %}" width="60px" height="60px" alt="">
-            </div>
-            <!-- Navbar Right Menu -->
-            <div class="col-md-2 col-sm-2 col-xs-2">
-            {%if user.is_authenticated%}
-            {% include 'control_bar.html' %}
-            {% endif%}
-            </div>
-        </nav>
-    </header>
-    {% if user.is_staff %} {% include 'menus/menu_admin.html' %}
-    {% endif %}
 
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #E8BE13;"
+                role="navigation">
+                <!-- Sidebar toggle button-->
+                <div class="col-md-1 col-sm-2 col-xs-2 container-fluid" style="padding: 0px">
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-8 text-center">
+                    <img src="{% static 'favicon/HuronLogo.ico' %}" width="60px" height="60px" alt="">
+                </div>
+                <!-- Navbar Right Menu -->
+                <div class="col-md-2 col-sm-2 col-xs-2">
+                    {%if user.is_authenticated%}
+                    {% include 'control_bar.html' %}
+                    {% endif%}
+                </div>
+            </nav>
+        </header>
+        {% if user.is_staff %} {% include 'menus/menu_admin.html' %}
+        {% endif %}
+    </div>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -125,55 +134,56 @@
     {% include 'control_panel.html' %}
 
     <div class="control-sidebar-bg"></div>
-</div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
+    <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
-<!-- Material Design -->
-<script src="{% static 'dist/js/material.min.js' %}"></script>
-<script src="{% static 'dist/js/ripples.min.js' %}"></script>
-<script>
-    $.material.init();
-</script>
-<!-- FastClick -->
-<script src="{% static 'bower_components/fastclick/lib/fastclick.js' %}"></script>
-<!-- AdminLTE App -->
-<script src="{% static 'dist/js/adminlte.min.js' %}"></script>
-<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
-<script>
-        $("#menu-toggle").click(function(e) {
+    <!-- REQUIRED JS SCRIPTS -->
+
+    <!-- jQuery 3 -->
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- Material Design -->
+    <script src="{% static 'dist/js/material.min.js' %}"></script>
+    <script src="{% static 'dist/js/ripples.min.js' %}"></script>
+    <script>
+        $.material.init();
+    </script>
+    <!-- FastClick -->
+    <script src="{% static 'bower_components/fastclick/lib/fastclick.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+    <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+    <script>
+        $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");
         });
-        </script>
-    
-    
-{{ form.media.js }}
+    </script>
 
-<script>
-    {% for msg in messages %}
-    $(document).ready(function () {
-        setTimeout(function () {
-            toastr.options = {
-                "closeButtons": true,
-                "progressBar": true,
-                "preventDuplicates": true,
-                "showEasing": "swing",
-                "extendedTimeOut": 5000,
-                "timeOut": 4000
-            }
-            toastr["{{ msg.tags }}"]("{{ msg }}")
-        }, 500);
-    });
-    {% endfor %}
-</script>
 
-{% block js %}{% endblock js %}
+    {{ form.media.js }}
+
+    <script>
+        {% for msg in messages %}
+        $(document).ready(function () {
+            setTimeout(function () {
+                toastr.options = {
+                    "closeButtons": true,
+                    "progressBar": true,
+                    "preventDuplicates": true,
+                    "showEasing": "swing",
+                    "extendedTimeOut": 5000,
+                    "timeOut": 4000
+                }
+                toastr["{{ msg.tags }}"]("{{ msg }}")
+            }, 500);
+        });
+        {% endfor %}
+    </script>
+
+    {% block js %}{% endblock js %}
 
 </body>
+
 </html>
