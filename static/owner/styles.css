@@ -30,14 +30,14 @@ label.control-label {
   background-color: #E8BE13;;
 }
 .card-title {
-  margin-top: -1.5em;
+  margin-top: 1.5em;
   padding-bottom: 0.5em;
   padding-left: 0.5em;
   color: rgb(0, 0, 0);
   font-size: 2em;
 }
 .card-image {
-  width: 100%;
+  width: 162px;
   height: 162px;
 }
 .card-desc {
