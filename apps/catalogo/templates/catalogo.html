@@ -34,7 +34,7 @@
         {% for producto in products%}
         <div class="col-4">
             <div class="card col-4">
-                <img src="{{producto.foto.url}}" width="100%" height="100%" alt="">
+                <img src="{{producto.foto.url}}" class="img-thumbnail" alt="">
                 <div class="card-title">
                     <p>{{ producto.nombre }} - {{ producto.linea }}</p>
                 </div>
