@@ -50,7 +50,7 @@
         </a>
 
         <!-- Header Navbar -->
-        <nav class="navbar navbar-static-top" style="background-color: #E8BE13;" role="navigation">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #E8BE13;" role="navigation">
             <!-- Sidebar toggle button-->
             <div class="col-md-1 col-sm-2 col-xs-2" style="padding: 0px">
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" >
@@ -62,7 +62,9 @@
             </div>
             <!-- Navbar Right Menu -->
             <div class="col-md-2 col-sm-2 col-xs-2">
+            {%if user.is_authenticated%}
             {% include 'control_bar.html' %}
+            {% endif%}
             </div>
         </nav>
     </header>

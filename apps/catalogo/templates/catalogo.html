@@ -33,7 +33,7 @@
     <div class="row text-center">
         {% for producto in products%}
         <div class="col-4">
-            <div class="card">
+            <div class="card col-4">
                 <img src="{{producto.foto.url}}" width="100%" height="100%" alt="">
                 <div class="card-title">
                     <p>{{ producto.nombre }} - {{ producto.linea }}</p>
