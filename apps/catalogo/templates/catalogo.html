@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block titulo %} Detalles de Producto {% endblock titulo %}
+{% block descripcion_pagina %} Detalles de producto {% endblock descripcion_pagina %}
+{% block miga_pan %}
+<li><a href="{% url 'accounts:home'%}"><i class="fa fa-dashboard"></i> DASHBOARD</a></li>
+<li><a href="{% url 'productos:manage' %}"></i> GESTIONAR PRODUCTOS</a></li>
+<li class="active">DETALLES PRODUCTO</li>
+{% endblock miga_pan %}
+
+{% block css %}
+<link rel="stylesheet" href="{%  static 'bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css' %}">
+<link href="{% static 'bower_components/datatables.net-bs/responsive/responsive.dataTables.min.css' %}"
+    rel="stylesheet">
+<link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css' %}">
+{{ form_empleado.media.css }}
+<style media="screen">
+    .select2-container {
+        width: 100% !important;
+    }
+</style>
+{% endblock css %}
+
+{% block titulo_panel %}
+<h3 class="box-title"> Detalles de Producto</h3>
+{% endblock titulo_panel %}
+
+{% block contenido_panel %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row text-center">
+        <div class="col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 text-center">
+            <p class="text-center">
+                <img src="{{producto.foto.url}}" width="100%" height="100%" alt="">
+            </p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <label>
+                Nombre del producto
+            </label>
+            <p>{{ producto.nombre }}</p>
+        </div>
+        <div class="col-md-4 ">
+            <label>
+                Linea del producto
+            </label>
+            <p>{{ producto.linea }}</p>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-4 ">
+            <label>
+                Precio del producto
+            </label>
+            <p>{{ producto.precio }}</p>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <a class="btn btn-primary btn-raised" href="{% url 'productos:manage' %}" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp Volver</a>
+        </div>
+</form>
+{% endblock contenido_panel %}
+
+{% block js %}
+
+<script src="{% static 'bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+<script src="{% static 'bower_components/datatables.net-bs/responsive/dataTables.responsive.min.js' %}"></script>
+
+<script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
+
+<script>
+    {% for msg in messages %}
+    $(document).ready(function () {
+        setTimeout(function () {
+            toastr.options = {
+                "closeButtons": true,
+                "progressBar": true,
+                "preventDuplicates": true,
+                "showEasing": "swing",
+                "extendedTimeOut": 5000,
+                "timeOut": 4000
+            }
+            toastr["{{ msg.tags }}"]("{{ msg }}")
+        }, 500);
+    });
+    {% endfor %}
+</script>
+
+{% endblock js %}
