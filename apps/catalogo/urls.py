@@ -6,5 +6,5 @@ from apps.catalogo.views import *
 app_name = 'catalogo'
 
 urlpatterns = [
-    path('login', catalogo(), name='catalogo'),
+    path('', catalogo(), name='catalogo'),
 ]
