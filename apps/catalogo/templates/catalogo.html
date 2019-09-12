@@ -31,41 +31,27 @@
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row text-center">
-        <div class="col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4 text-center">
-            <p class="text-center">
+        {% for producto in products%}
+        <div class="col-4">
+            <div class="card">
                 <img src="{{producto.foto.url}}" width="100%" height="100%" alt="">
-            </p>
+                <div class="card-title">
+                    <p>{{ producto.nombre }} - {{ producto.linea }}</p>
+                </div>
+                <div class="card-desc">
+                    <p>{{ producto.precio }}</p>
+                </div>
+                <div class="card-actions">
+                    <button type='button' class='card-action-readMore'>Read More</button>
+                </div>
+            </div>
         </div>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-2">
-            <label>
-                Nombre del producto
-            </label>
-            <p>{{ producto.nombre }}</p>
-        </div>
-        <div class="col-md-4 ">
-            <label>
-                Linea del producto
-            </label>
-            <p>{{ producto.linea }}</p>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-4 ">
-            <label>
-                Precio del producto
-            </label>
-            <p>{{ producto.precio }}</p>
-        </div>
-    </div>
-    <br>
-    <hr>
+    {% endfor %}
     <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
-            <a class="btn btn-primary btn-raised" href="{% url 'productos:manage' %}" role="button"><span class="glyphicon glyphicon-chevron-left"></span>&nbsp Volver</a>
+            <a class="btn btn-primary btn-raised" href="{% url 'acoounts:login' %}" role="button"><span
+                    class="glyphicon glyphicon-chevron-left"></span>&nbsp Volver</a>
         </div>
 </form>
 {% endblock contenido_panel %}
@@ -94,6 +80,31 @@
         }, 500);
     });
     {% endfor %}
+    var buttons = document.getElementsByTagName('button');
+
+    Array.prototype.forEach.call(buttons, function (b) {
+        b.addEventListener('click', createRipple);
+    });
+
+
+    function createRipple(e) {
+        // alert('x');
+        var circle = document.createElement('div');
+        this.appendChild(circle);
+
+        var d = Math.max(this.clientWidth, this.clientHeight);
+
+        circle.style.width = circle.style.height = d + 'px';
+
+        var rect = this.getBoundingClientRect();
+        circle.style.left = e.clientX - rect.left - d / 2 + 'px';
+        circle.style.top = e.clientY - rect.top - d / 2 + 'px';
+        circle.classList.add('ripple');
+
+        setTimeout(function () {
+            circle.remove();
+        }, 500);
+    }
 </script>
 
 {% endblock js %}
