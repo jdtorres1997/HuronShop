@@ -1,0 +1,13 @@
+/* Touch Swipe
+--------------------------------------------------*/
+.sp-grab {
+	cursor: url("images/openhand.b06c243f534d.cur"), move;
+}
+
+.sp-grabbing {
+	cursor: url("images/closedhand.a8c874b93b3d.cur"), move;
+}
+
+.sp-selectable {
+	cursor: default;
+}
