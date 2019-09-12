@@ -40,7 +40,10 @@
     style="background-image:url({% static 'img/fondo.jpg' %})">
 
     <div id="wrapper">
-
+        <nav id="sidebar">
+            {% if user.is_staff %} {% include 'menus/menu_admin.html' %}
+            {% endif %}
+        </nav>
         <!-- Main Header -->
         <header class="main-header" style="background-color: #E8BE13;">
 
@@ -68,8 +71,8 @@
                 </div>
             </nav>
         </header>
-        {% if user.is_staff %} {% include 'menus/menu_admin.html' %}
-        {% endif %}
+
+
     </div>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -152,16 +155,16 @@
     <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
     <script>
         $("#menu-toggle").click(function (e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+        });
         (function ($, viewport) {
 
             // Executes in XS and SM breakpoints
             if (viewport.is('<md')) {
-                
+
             }
-            
+
     </script>
 
 
