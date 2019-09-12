@@ -3,20 +3,21 @@
 
 	<!-- sidebar: style can be found in sidebar.less -->
 	<section class="sidebar">
-		<!-- Sidebar Menu -->
-		<ul class="sidebar-menu  " data-widget="tree">
+		<div class="sidebar-header">
+			<!-- Logo -->
 			<a href="{% url 'accounts:home' %}" class="logo" style="background-color: #E8BE13;">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini" style="background-color: #E8BE13;"><b>HURON</b></span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg" style="background-color: #E8BE13;"><b>    HURON</b></span>
-        </a>
-			<li class="header"><a href="{%url 'clientes:gestion'%}">clientes</a></li>
-			<li class="header"><a href="{%url 'compras:gestion'%}">compras</a></li>
-			<li class="header"><a href="{%url 'lineas:manage'%}">Lineas</a></li>
-			<li class="header"><a href="{%url 'pedidos:gestion'%}">pedidos</a></li>
-			<li class="header"><a href="{%url 'productos:manage'%}">productos</a></li>
-			<!-- Optionally, you can add icons to the links -->
+				<!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-mini" style="background-color: #E8BE13;"><b>HURON</b></span>
+				<!-- logo for regular state and mobile devices -->
+				<span class="logo-lg" style="background-color: #E8BE13;"><b> HURON</b></span>
+			</a>
+		</div>
+		<li class="header"><a href="{%url 'clientes:gestion'%}">clientes</a></li>
+		<li class="header"><a href="{%url 'compras:gestion'%}">compras</a></li>
+		<li class="header"><a href="{%url 'lineas:manage'%}">Lineas</a></li>
+		<li class="header"><a href="{%url 'pedidos:gestion'%}">pedidos</a></li>
+		<li class="header"><a href="{%url 'productos:manage'%}">productos</a></li>
+		<!-- Optionally, you can add icons to the links -->
 		</ul>
 		<!-- /.sidebar-menu -->
 	</section>
