@@ -33,7 +33,7 @@
     <div class="row text-center">
         {% for producto in products%}
         <div class="col-4">
-            <div class="card col-4">
+            <div class="card " width="100%" height="100%">
                 <img src="{{producto.foto.url}}" class="img-thumbnail" alt="">
                 <div class="card-title">
                     <p>{{ producto.nombre }} - {{ producto.linea }}</p>
@@ -46,8 +46,9 @@
                 </div>
             </div>
         </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+    
     <div class="row">
         <div class="col-md-4 col-md-offset-4 text-center">
             <a class="btn btn-primary btn-raised" href="{% url 'accounts:login' %}" role="button"><span
