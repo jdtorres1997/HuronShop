@@ -36,7 +36,7 @@
     {% block css %}{% endblock css %}
 </head>
 
-<body class="hold-transition skin-yellow-light sidebar-mini sidebar-collapse layout-boxed"
+<body class="hold-transition skin-yellow-light sidebar sidebar-collapse layout-boxed"
     style="background-image:url({% static 'img/fondo.jpg' %})">
 
     <div id="wrapper">
@@ -47,7 +47,7 @@
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #E8BE13;"
-                role="navigation">
+                role="navigation" position="Fixed">
                 {%if user.is_authenticated%}
 
                 <!-- Sidebar toggle button-->
@@ -151,31 +151,37 @@
     <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
     <script src="{% static 'plugins/toastr/toastr.min.js' %}"></script>
     <script>
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#wrapper").toggleClass("toggled");
-        });
+        (function ($, viewport) {
+
+            // Executes in XS and SM breakpoints
+            if (viewport.is('<md')) {
+                $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+            }
+            
     </script>
 
 
     {{ form.media.js }}
 
     <script>
-        {% for msg in messages %}
-        $(document).ready(function () {
-            setTimeout(function () {
-                toastr.options = {
-                    "closeButtons": true,
-                    "progressBar": true,
-                    "preventDuplicates": true,
-                    "showEasing": "swing",
-                    "extendedTimeOut": 5000,
-                    "timeOut": 4000
-                }
-                toastr["{{ msg.tags }}"]("{{ msg }}")
-            }, 500);
-        });
-        {% endfor %}
+            {% for msg in messages %}
+            $(document).ready(function () {
+                setTimeout(function () {
+                    toastr.options = {
+                        "closeButtons": true,
+                        "progressBar": true,
+                        "preventDuplicates": true,
+                        "showEasing": "swing",
+                        "extendedTimeOut": 5000,
+                        "timeOut": 4000
+                    }
+                    toastr["{{ msg.tags }}"]("{{ msg }}")
+                }, 500);
+            });
+            {% endfor %}
     </script>
 
     {% block js %}{% endblock js %}
